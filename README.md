@@ -2,6 +2,10 @@
 This repo contains a list of usefull resources 
 
 
+
+## Please Check the wiki
+[wiki](https://github.com/Genocs/documentations/wiki)
+
 ## IA and Machine Learning
 
 ### .NET
