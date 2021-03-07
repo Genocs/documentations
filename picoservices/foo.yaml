@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: foo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: foo
+  template:
+    metadata:
+      labels:
+        app: foo
+    spec:
+      containers:
+        - name: api
+          image: genocs/foo
+          ports:
+            - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: foo-service
+  labels:
+    app: foo-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: foo  
+  ports:
+    - name: http
+      protocol: TCP
+      port: 5000
+      targetPort: 5300
