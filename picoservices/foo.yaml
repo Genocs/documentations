@@ -1,9 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: genocs
   name: foo-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: foo
@@ -17,19 +18,27 @@ spec:
           image: genocs/foo
           ports:
             - containerPort: 5000
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: foo-service
+  namespace: genocs
+  name: genocs-foo-service
   labels:
-    app: foo-service
+    app: genocs-foo-service
 spec:
   type: LoadBalancer
   selector:
-    app: foo  
+    app: foo
   ports:
     - name: http
       protocol: TCP
-      port: 5000
-      targetPort: 5300
+      port: 5300
+      targetPort: 5000
