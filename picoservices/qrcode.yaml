@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: genocs
   name: redis-server
 spec:
   replicas: 1
@@ -34,6 +35,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: genocs
   name: redis-server
 spec:
   ports:
@@ -44,6 +46,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: genocs
   name: genocs-qrcode-service
 spec:
   replicas: 4
@@ -76,6 +79,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: genocs
   name: genocs-solomon-frontend
 spec:
   replicas: 1
@@ -105,6 +109,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: genocs
   name: genocs-qrcode-service
 spec:
   type: LoadBalancer
@@ -119,6 +124,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: genocs
   name: genocs-solomon-frontend
 spec:
   type: LoadBalancer

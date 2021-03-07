@@ -16,6 +16,14 @@ docker run --name genocs-foo-container -p 5200:5000 genocs/foo
 
 
 # Run foo service into kubernetes
+
+Create the namespace
+``` bash
+kubectl create namespace genocs
+kubectl create -f namespace-dev.json
+```
+
+
 ``` bash
 kubectl apply -f foo.yaml
 ```
