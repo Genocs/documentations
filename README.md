@@ -1,5 +1,5 @@
 # documentations
-This repo contains a list of usefull resources 
+This repo contains a list of useful resources 
 
 
 ## Microservice Patterns
