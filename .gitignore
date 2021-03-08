@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
