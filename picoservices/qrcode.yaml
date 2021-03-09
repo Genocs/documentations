@@ -118,7 +118,7 @@ spec:
   ports:
     - name: http
       protocol: TCP
-      port: 9376
+      port: 5001
       targetPort: 80
 ---
 apiVersion: v1

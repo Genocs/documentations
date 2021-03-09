@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: genocs
-  name: foo-deployment
+  name: genocs-python-flask-deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: foo
+      app: python-flask
   template:
     metadata:
       labels:
-        app: foo
+        app: python-flask
     spec:
       containers:
         - name: api
-          image: genocs/foo
+          image: genocs/python-flask
           ports:
             - containerPort: 5000
           resources:
@@ -30,13 +30,13 @@ apiVersion: v1
 kind: Service
 metadata:
   namespace: genocs
-  name: genocs-foo-service
+  name: genocs-python-flask-service
   labels:
-    app: genocs-foo-service
+    app: genocs-python-flask-service
 spec:
   type: LoadBalancer
   selector:
-    app: foo
+    app: python-flask
   ports:
     - name: http
       protocol: TCP
