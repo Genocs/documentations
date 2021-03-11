@@ -1,5 +1,5 @@
 Welcome to Genocs!
-===================
+====
 
 Before start to do anythings!
 
@@ -8,14 +8,12 @@ Don't forget to apply these general golden rules!
 - DRY (Don't repeat yourself)
 - KISS (Keep It Simple Stupid)
 
-
 and remember:
 
 > - The best and fastest way to do something is don't.
-> - So before start, ask yourself: **it is needed**?
+> - So before start, ask yourself: **Is it needed**?
 
-
-----------
+----
 
 Setup Idea
 -------------
@@ -32,7 +30,7 @@ Project management
 
 Architecture
 -------------
-- Clean Architecture patterns
+- Clean Architecture Patterns
 - Microservise Architecture
 
 
@@ -55,7 +53,6 @@ Package manager (How store the artifacts)
 - MyGet
 - DockerHub
 - Private Repository
-
 
 
 The platforms (Where the solution is executed)
@@ -85,13 +82,14 @@ The extenal service (What infrustructure services are needed)
 
 
 Software development
+----
 
 - Backend services
 - Frontend Services
 - Data analysis and processing
 
 
-### Backend services
+## Backend services
 
 Programming languages
 - C/C++
@@ -102,4 +100,3 @@ Programming languages
 - kotlin
 - GO
 - Python
-
