@@ -1,5 +1,4 @@
-from flask import request
-from flask import Flask
+from flask import Flask, request, jsonify
 
 #from flask import render_template
 
@@ -11,14 +10,15 @@ def hello():
     return 'Welcome to Flask!!!'
 
 
-@app.route('/ping')
+@app.route('/ping', methods=['GET'])
 def ping():
     return 'pong'
 
 
-@app.route('/foo')
-def foo():
-    return '{"msg":"Hello from the foo microservice"}'
+@app.route('/post_my_data', methods=['POST'])
+def post_my_data():
+    content = request.json
+    return jsonify(content)
 
 
 @app.route('/print/<name>')

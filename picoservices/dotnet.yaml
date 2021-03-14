@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: genocs
+  name: genocs-dotnet-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dotnet
+  template:
+    metadata:
+      labels:
+        app: dotnet
+    spec:
+      containers:
+        - name: api
+          image: genocs/dotnet
+          ports:
+            - containerPort: 5000
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: genocs
+  name: genocs-dotnet-service
+  labels:
+    app: genocs-dotnet-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: dotnet
+  ports:
+    - name: http
+      protocol: TCP
+      port: 5600
+      targetPort: 5000

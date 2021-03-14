@@ -4,17 +4,36 @@
 ###############################################################################
 
 
-@appUrl = http://localhost:3000
-@Dapr-appUrl = http://localhost:3500
-@Dapr-appName = nodeapp
+####
+# nodejs variables
+####
+#@appUrl = http://localhost:3000
+#@Dapr-appUrl = http://localhost:3500
+#@Dapr-appName = nodeapp
+
+####
+# python variables
+####
+@appUrl = http://localhost:5000
+@Dapr-appUrl = http://localhost:3600
+@Dapr-appName = pythonapp
+
+
+####
+# golang variables
+####
+@appUrl = http://localhost:8080
+@Dapr-appUrl = http://localhost:3700
+@Dapr-appName = golangapp
+
 
 
 ### Check the Home page
-GET {{appUrl}}/ HTTP/1.1
+GET {{appUrl}} HTTP/1.1
 
 
 ### Check the ping
-GET {{appUrl}}/ping/ HTTP/1.1
+GET {{appUrl}}/ping HTTP/1.1
 
 
 ### Check simple post
@@ -22,19 +41,17 @@ POST {{appUrl}}/post_my_data HTTP/1.1
 header : "Content-Type": "application/json"
 
 {
- "id": "{{$guid}}",
     "data": {
         "id": "{{$guid}}"
-    }
-    
+    }    
 }
 
 
 ### Dapr Version - Check the Home page
-GET {{Dapr-appUrl}}/v1.0/invoke/{{Dapr-appName}}/method/ HTTP/1.1
+GET {{Dapr-appUrl}}/v1.0/invoke/{{Dapr-appName}}/method HTTP/1.1
 
 ### Dapr Version - Check the ping
-GET {{Dapr-appUrl}}/v1.0/invoke/{{Dapr-appName}}/method/ping/ HTTP/1.1
+GET {{Dapr-appUrl}}/v1.0/invoke/{{Dapr-appName}}/method/ping HTTP/1.1
 
 ### Dapr Version - Check simple post
 POST {{Dapr-appUrl}}/v1.0/invoke/{{Dapr-appName}}/method/post_my_data HTTP/1.1
