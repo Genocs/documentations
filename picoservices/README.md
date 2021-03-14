@@ -58,7 +58,7 @@ kubectl create -f namespace-dev.json
 
 Run the container
 ``` bash
-kubectl apply -f python-flask.yaml
+kubectl apply -f python.yaml
 kubectl apply -f nodejs.yaml
 kubectl apply -f golang.yaml
 kubectl apply -f dotnet.yaml

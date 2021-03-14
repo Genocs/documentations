@@ -7,24 +7,24 @@
 ####
 # nodejs variables
 ####
-#@appUrl = http://localhost:5300
-#@Dapr-appUrl = http://localhost:3500
-#@Dapr-appName = nodeapp
+@appUrl = http://localhost:5300
+@Dapr-appUrl = http://localhost:3500
+@Dapr-appName = nodeapp
 
 ####
 # python variables
 ####
-@appUrl = http://localhost:5400
-@Dapr-appUrl = http://localhost:3600
-@Dapr-appName = pythonapp
+#@appUrl = http://localhost:5400
+#@Dapr-appUrl = http://localhost:3600
+#@Dapr-appName = pythonapp
 
 
 ####
 # golang variables
 ####
-@appUrl = http://localhost:5500
-@Dapr-appUrl = http://localhost:3700
-@Dapr-appName = golangapp
+#@appUrl = http://localhost:5500
+#@Dapr-appUrl = http://localhost:3700
+#@Dapr-appName = golangapp
 
 
 
