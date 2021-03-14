@@ -57,9 +57,27 @@ kubectl apply -f nodejs.yaml
 kubectl apply -f golang.yaml
 ```
 
-After the creation the services are 
-python-flask:5300
-nodejs:5400
-golang:5500
+After the creation the services are:
+1. python-flask:5300
+2. nodejs:5400
+3. golang:5500
+
+# Run with Dapr
+
+How to run the service with Dapr 
+``` bash
+# Run the Dapr app
+dapr run --app-id nodeapp --app-port 3000 --dapr-http-port 3500 node nodejs/hello-server.js
+
+# Check the app is running with dapr
+dapr list
+
+# Call Get 
+dapr invoke --app-id nodeapp --method ping -v GET
+
+# Call Post
+dapr invoke --app-id nodeapp --method post_my_data -d '{\"data\":{\"id\":\"Hello\"}}'
+```
 
 
+http://localhost:3500/v1.0/invoke/nodeapp/method/post_my_data

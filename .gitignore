@@ -38,7 +38,7 @@ bin
 obj
 
 # Nodejs
-**/node_modules/*
+**/node_modules
 **/package-lock.json
 
 **/.dtbcache.v2
