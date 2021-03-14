@@ -32,6 +32,7 @@ The golang service is a simple go project that use a standard web server.
 
 To run the project locally
 ``` bash
+cd golang
 go mod init github.com/genocs/golang
 go get
 go run main.go
