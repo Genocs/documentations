@@ -7,7 +7,7 @@ const express = require('express');
 
 const app = express();
 app.use(express.json());
-const port = 3000;
+const port = 5300;
 
 app.get('/', (_req, res) => {
     console.log('Called home!!!');

@@ -17,7 +17,7 @@ spec:
         - name: api
           image: genocs/nodejs
           ports:
-            - containerPort: 3000
+            - containerPort: 5300
           resources:
             limits:
               memory: 512Mi
@@ -40,5 +40,5 @@ spec:
   ports:
     - name: http
       protocol: TCP
-      port: 5400
-      targetPort: 3000
+      port: 5300
+      targetPort: 5300
