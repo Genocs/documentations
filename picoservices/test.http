@@ -9,7 +9,7 @@
 ####
 @appUrl = http://127.0.0.1:5300
 @Dapr-appUrl = http://127.0.0.1:3500
-@Dapr-appName = nodeapp
+#@Dapr-appName = nodeapp
 
 ####
 # python variables
@@ -24,7 +24,7 @@
 ####
 #@appUrl = http://localhost:5500
 #@Dapr-appUrl = http://localhost:3700
-#@Dapr-appName = golangapp
+@Dapr-appName = golangapp
 
 
 
@@ -55,11 +55,12 @@ GET {{Dapr-appUrl}}/v1.0/invoke/{{Dapr-appName}}/method HTTP/1.1
 GET {{Dapr-appUrl}}/v1.0/invoke/{{Dapr-appName}}/method/ping HTTP/1.1
 
 ### Dapr Version - Check simple post
-POST {{Dapr-appUrl}}/v1.0/invoke/{{Dapr-appName}}/method/post_my_data HTTP/1.1
+POST {{Dapr-appUrl}}/v1.0/invoke/{{Dapr-appName}}/method/order/submit HTTP/1.1
 header : "Content-Type": "application/json"
 
 {
     "data": {
-        "id": "{{$guid}}"
+        "id": "{{$guid}}",
+        "description": "{{$randomAdjective}}"
     }
 }

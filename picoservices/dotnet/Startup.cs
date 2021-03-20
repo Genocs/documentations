@@ -9,7 +9,6 @@ using Microsoft.OpenApi.Models;
 using System.Security.Cryptography;
 using System.Text;
 using Genocs.Microservice.Infrastructure;
-using Dapr.Client;
 
 namespace Genocs.Microservice
 {
@@ -121,7 +120,7 @@ namespace Genocs.Microservice
         private SecurityKey CreateRsaSecurityKey()
         {
             ///
-            /// The UTU Auth
+            /// The RSA Auth
             ///            
             RSA publicRsa = RSA.Create();
             publicRsa.FromCustomXmlString(Configuration["JWT:Secret"]);

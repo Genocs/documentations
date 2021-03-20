@@ -27,11 +27,11 @@ type OrderResponse struct {
 }
 
 type OrderPayload struct {
-	Data Order
+	Data Order `json:"data"`
 }
 
 type OrderPayloadResponse struct {
-	Data OrderResponse
+	Data OrderResponse `json:"data"`
 }
 
 func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {

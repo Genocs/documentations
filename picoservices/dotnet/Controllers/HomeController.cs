@@ -1,5 +1,4 @@
-﻿using Genocs.Microservice.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace Genocs.Microservice.Controllers
@@ -11,7 +10,7 @@ namespace Genocs.Microservice.Controllers
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
-            => _logger = logger;
+            => _logger = logger ?? throw new System.ArgumentNullException(nameof(logger));
 
         [HttpGet]
         public IActionResult Get()

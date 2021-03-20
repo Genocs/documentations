@@ -80,7 +80,7 @@ How to run the service with Dapr
 dapr run --app-id nodeapp --app-port 5300 --dapr-http-port 3500 node nodejs/hello-server.js
 
 # Run the python Dapr app
-dapr run --app-id pythonapp --app-port 5400 --dapr-http-port 3600 python python-flask/app.py
+dapr run --app-id pythonapp --app-port 5400 --dapr-http-port 3600 python python/app.py
 
 # Run the golang Dapr app
 cd golang
@@ -90,23 +90,31 @@ cd ..
 # Run the dotnet Dapr app
 cd dotnet
 dotnet build --configuration Release
-dapr run --app-id dotnetapp --app-port 5001 --dapr-http-port 3500 dotnet run
+dapr run --app-id dotnetapp --app-port 5100 --dapr-http-port 3800 dotnet run
 cd ..
 
-# Check the app running with dapr
+## How to check the app running with dapr
 dapr list
 
 # Call Get 
 dapr invoke --app-id nodeapp --method ping -v GET
 
-# Call Post
+## Call Post
 dapr invoke --app-id nodeapp --method order/submit -d '{\"data\":{\"id\":\"123466\", \"description\":\"simple description\"}}'
 ```
 
+http://localhost:3500/v1.0/invoke/nodeapp/method/order/submit
 
-http://localhost:3500/v1.0/invoke/nodeapp/method/post_my_data
 
+## State Storage check
 
+Following command allows to check state storage (based on Redis) is working 
+``` bash
+docker exec -it dapr_redis redis-cli
+KEYS *
+HGETALL "dotnetapp||dotnetapp"
+exit
+```
 
 Golang note:
 
