@@ -15,9 +15,10 @@ def ping():
     return 'pong'
 
 
-@app.route('/post_my_data', methods=['POST'])
-def post_my_data():
+@app.route('/order/submit', methods=['POST'])
+def order_submit():
     content = request.json
+    content["data"]["status"] = "Accepted"
     return jsonify(content)
 
 

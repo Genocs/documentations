@@ -87,6 +87,12 @@ cd golang
 dapr run --app-id golangapp --app-port 5500 --dapr-http-port 3700 go run main.go
 cd ..
 
+# Run the dotnet Dapr app
+cd dotnet
+dotnet build --configuration Release
+dapr run --app-id dotnetapp --app-port 5001 --dapr-http-port 3500 dotnet run
+cd ..
+
 # Check the app running with dapr
 dapr list
 
@@ -94,7 +100,7 @@ dapr list
 dapr invoke --app-id nodeapp --method ping -v GET
 
 # Call Post
-dapr invoke --app-id nodeapp --method post_my_data -d '{\"data\":{\"id\":\"Hello\"}}'
+dapr invoke --app-id nodeapp --method order/submit -d '{\"data\":{\"id\":\"123466\", \"description\":\"simple description\"}}'
 ```
 
 
@@ -103,5 +109,7 @@ http://localhost:3500/v1.0/invoke/nodeapp/method/post_my_data
 
 
 Golang note:
+
 [Golang JSON serializer](https://blog.golang.org/json)
+
 [Golang CRUD PostgreSQL](https://sagarkbhatt.medium.com/golang-hack-empty-response-body-682cf1a60cf6)

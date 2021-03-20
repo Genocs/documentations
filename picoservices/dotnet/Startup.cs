@@ -9,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using System.Security.Cryptography;
 using System.Text;
 using Genocs.Microservice.Infrastructure;
+using Dapr.Client;
 
 namespace Genocs.Microservice
 {
@@ -54,6 +55,7 @@ namespace Genocs.Microservice
                     ValidateIssuerSigningKey = true
                 };
             });
+            services.AddDaprClient();
 
             services.AddSwaggerGen(swagger =>
             {

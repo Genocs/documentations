@@ -15,13 +15,23 @@ import (
 	"gopkg.in/natefinch/lumberjack.v2"
 )
 
-type InternalMessage struct {
-	Id string `json:"id"`
+type Order struct {
+	Id          string `json:"id"`
+	Description string `json:"description"`
 }
 
-type Message struct {
-	Id   string
-	Data InternalMessage
+type OrderResponse struct {
+	Id          string `json:"id"`
+	Description string `json:"description"`
+	Status      string `json:"status"`
+}
+
+type OrderPayload struct {
+	Data Order
+}
+
+type OrderPayloadResponse struct {
+	Data OrderResponse
 }
 
 func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
@@ -46,26 +56,31 @@ func handlerPing(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("pong"))
 }
 
-func handlerPostMyData(w http.ResponseWriter, r *http.Request) {
+func handlerOrderSubmit(w http.ResponseWriter, r *http.Request) {
 
-	var payload Message
+	var payload OrderPayload
 	err := json.NewDecoder(r.Body).Decode(&payload)
 	if err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
 		return
 	}
 
-	log.Printf("payload id: %s\n", payload.Id)
-	log.Printf("payload Data.Id: %s\n", payload.Data.Id)
+	log.Printf("payload data.Id: %s\n", payload.Data.Id)
+	log.Printf("payload data.Description: %s\n", payload.Data.Description)
 
 	if err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
 		return
 	}
 
+	var payloadResponse OrderPayloadResponse
+	payloadResponse.Data.Id = payload.Data.Id
+	payloadResponse.Data.Description = payload.Data.Description
+	payloadResponse.Data.Status = "Accepted"
+
 	defer r.Body.Close()
 
-	respondWithJSON(w, http.StatusCreated, payload)
+	respondWithJSON(w, http.StatusCreated, payloadResponse)
 }
 
 func main() {
@@ -74,7 +89,7 @@ func main() {
 
 	r.HandleFunc("/", handlerHome)
 	r.HandleFunc("/ping", handlerPing)
-	r.HandleFunc("/post_my_data", handlerPostMyData).Methods("POST")
+	r.HandleFunc("/order/submit", handlerOrderSubmit).Methods("POST")
 
 	srv := &http.Server{
 		Handler:      r,

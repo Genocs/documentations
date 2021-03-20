@@ -18,19 +18,17 @@ app.get('/ping', (_req, res) => {
     res.send('pong');
 });
 
-app.post('/post_my_data', express.json(), (req, res) => {
+app.post('/order/submit', express.json(), (req, res) => {
+    //console.log(req.body);
     const data = req.body.data;
-    console.log(req.body);
-
-    var result = '';
+    var result = {};
 
     if (data) {
-        const id = data.id;
-        result = "Got a body with ID: " + id;
+        result = { id: data.id, description: data.description, status: "Accepted" };
     } else {
         result = "The body data is empty";
     }
-    console.log(result);
+    //console.log(result);
     res.status(200).send(result);
 });
 

@@ -7,8 +7,8 @@
 ####
 # nodejs variables
 ####
-@appUrl = http://localhost:5300
-@Dapr-appUrl = http://localhost:3500
+@appUrl = http://127.0.0.1:5300
+@Dapr-appUrl = http://127.0.0.1:3500
 @Dapr-appName = nodeapp
 
 ####
@@ -37,13 +37,14 @@ GET {{appUrl}}/ping HTTP/1.1
 
 
 ### Check simple post
-POST {{appUrl}}/post_my_data HTTP/1.1
+POST {{appUrl}}/order/submit HTTP/1.1
 header : "Content-Type": "application/json"
 
 {
     "data": {
-        "id": "{{$guid}}"
-    }    
+        "id": "123456",
+        "description": "Simple test"
+    }
 }
 
 
