@@ -31,17 +31,17 @@ namespace Genocs.Microservice.Controllers
         }
 
         [HttpPost("submit")]
-        public async System.Threading.Tasks.Task<IActionResult> PostSubmitOrderAsync([FromBody] OrderPayload payload)
+        public async Task<IActionResult> PostSubmitOrderAsync([FromBody] OrderPayload payload)
         {
             if (payload == null || payload.Data == null)
             {
-                return Ok("Empty payload");
+                return BadRequest("Empty payload");
             }
 
             await UpdateStateStorageAsync(payload);
             await CallExernalServiceAsync(payload);
 
-            OrderConfirmationPayload response = new OrderConfirmationPayload();
+            OrderConfirmationPayload response = new();
             response.Data = new OrderConfirmation { Id = payload.Data.Id, Description = payload.Data.Description, Status = "Acquired" };
             return Ok(response);
         }
@@ -50,13 +50,13 @@ namespace Genocs.Microservice.Controllers
         {
             await this.daprClient.SaveStateAsync(storeName, key, payload.Data);
             Order orderResult = await this.daprClient.GetStateAsync<Order>(storeName, key);
-            _logger.LogCritical($"Order Payload: '{orderResult}'");
+            _logger.LogInformation($"Order Payload: '{orderResult}'");
         }
 
         private async Task CallExernalServiceAsync(OrderPayload payload)
         {
             OrderConfirmationPayload externalServiceResult = await this.daprClient.InvokeMethodAsync<OrderPayload, OrderConfirmationPayload>(externalService, "order/submit", payload);
-            _logger.LogCritical($"External Service Order Payload: '{externalServiceResult}'");
+            _logger.LogInformation($"External Service Order Payload: '{externalServiceResult}'");
         }
     }
 }

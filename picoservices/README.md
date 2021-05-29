@@ -75,7 +75,7 @@ After the creation the services are running on:
 # Run with Dapr
 
 How to run the service with Dapr 
-``` bash
+``` ps
 # Run the nodejs Dapr app
 dapr run --app-id nodeapp --app-port 5300 --dapr-http-port 3500 node nodejs/hello-server.js
 

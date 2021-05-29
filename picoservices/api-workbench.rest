@@ -7,8 +7,8 @@
 ####
 # nodejs variables
 ####
-@appUrl = http://127.0.0.1:5300
-@Dapr-appUrl = http://127.0.0.1:3500
+#@appUrl = http://127.0.0.1:5300
+#@Dapr-appUrl = http://127.0.0.1:3500
 #@Dapr-appName = nodeapp
 
 ####
@@ -24,8 +24,15 @@
 ####
 #@appUrl = http://localhost:5500
 #@Dapr-appUrl = http://localhost:3700
-@Dapr-appName = golangapp
+#@Dapr-appName = golangapp
 
+
+####
+# dotnet
+####
+@appUrl = https://localhost:5601
+@Dapr-appUrl = http://127.0.0.1:3800
+@Dapr-appName = dotnetapp
 
 
 ### Check the Home page
@@ -37,8 +44,8 @@ GET {{appUrl}}/ping HTTP/1.1
 
 
 ### Check simple post
-POST {{appUrl}}/order/submit HTTP/1.1
-header : "Content-Type": "application/json"
+POST {{appUrl}}/Order/submit HTTP/1.1
+Content-Type: application/json
 
 {
     "data": {
@@ -56,7 +63,7 @@ GET {{Dapr-appUrl}}/v1.0/invoke/{{Dapr-appName}}/method/ping HTTP/1.1
 
 ### Dapr Version - Check simple post
 POST {{Dapr-appUrl}}/v1.0/invoke/{{Dapr-appName}}/method/order/submit HTTP/1.1
-header : "Content-Type": "application/json"
+Content-Type: application/json
 
 {
     "data": {
