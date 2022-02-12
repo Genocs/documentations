@@ -51,9 +51,9 @@ func handlerHome(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(fmt.Sprintf("Hello from Golang!!!")))
 }
 
-func handlerPing(w http.ResponseWriter, r *http.Request) {
-	log.Printf("Received request for ping\n")
-	w.Write([]byte("pong"))
+func handlerHealthCheck(w http.ResponseWriter, r *http.Request) {
+	log.Printf("Received request for health check\n")
+	w.Write([]byte("healthy"))
 }
 
 func handlerOrderSubmit(w http.ResponseWriter, r *http.Request) {
@@ -88,7 +88,7 @@ func main() {
 	r := mux.NewRouter()
 
 	r.HandleFunc("/", handlerHome)
-	r.HandleFunc("/ping", handlerPing)
+	r.HandleFunc("/hc", handlerHealthCheck)
 	r.HandleFunc("/order/submit", handlerOrderSubmit).Methods("POST")
 
 	srv := &http.Server{

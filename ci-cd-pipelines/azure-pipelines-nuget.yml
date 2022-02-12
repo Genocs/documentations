@@ -1,0 +1,75 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+# Before run pipeline please check the variables
+# Library variables
+# PrivateFeed
+
+# Pipeline variables
+# MajorVer
+# MinorVer
+# PatchVer
+# ProjectName
+
+# manual trigger
+trigger:
+  - none
+#- main
+
+# Changing the name the $(Build.BuildNumber) change as well
+name: $(MajorVer).$(MinorVer).$(PatchVer)$(Rev:.r)
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  - group: General
+  - name: buildConfiguration
+    value: "Release"
+  - name: version
+    value: "$(Build.BuildNumber)" # This variable is used to update the nuget version
+
+# Build section
+steps:
+  - task: UseDotNet@2
+    inputs:
+      version: "6.0.x"
+      includePreviewVersions: true # Required for preview versions
+  - task: NuGetAuthenticate@0
+    displayName: "NuGet Authenticate"
+  - task: DotNetCoreCLI@2
+    displayName: "Build projects"
+    inputs:
+      command: "build"
+      projects: "**/*.csproj"
+      arguments: "--configuration $(buildConfiguration)" # Update this to match your need
+
+  # Build and publish the artifact
+  - task: NuGetCommand@2
+    displayName: "Pack the Package"
+    inputs:
+      command: pack
+      packagesToPack: "src/$(ProjectName).Dto/*.csproj"
+
+  - task: DotNetCoreCLI@2
+    displayName: "Publish"
+    inputs:
+      command: publish
+      publishWebProjects: True
+      arguments: "--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)"
+      zipAfterPublish: True
+
+  - task: DotNetCoreCLI@2
+    displayName: "Push to the feed"
+    inputs:
+      command: "push"
+      packagesToPush: "$(Build.ArtifactStagingDirectory)/*.nupkg"
+      nuGetFeedType: "internal"
+      publishVstsFeed: "$(PrivateFeed)"

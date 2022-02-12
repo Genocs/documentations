@@ -1,0 +1,28 @@
+version: 3.8'
+
+# WARNING: change the <Super_SecretPa55word!> password before run it
+
+services:
+  sqlserver:
+    image: "mcr.microsoft.com/mssql/server"
+    container_name: sql_server
+    ports:
+      - 1433:1433
+    environment:
+      SA_PASSWORD: "<Super_SecretPa55word!>"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - mssqlsystem:/var/opt/mssql
+      - mssqluser:/var/opt/sqlserver
+    networks:
+      - genocs
+
+networks:
+  genocs:
+    name: genocs-network
+
+volumes:
+  mssqlsystem:
+    driver: local
+  mssqluser:
+    driver: local

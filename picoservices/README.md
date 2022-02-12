@@ -97,7 +97,7 @@ cd ..
 dapr list
 
 # Call Get 
-dapr invoke --app-id nodeapp --method ping -v GET
+dapr invoke --app-id nodeapp --method hc -v GET
 
 ## Call Post
 dapr invoke --app-id nodeapp --method order/submit -d '{\"data\":{\"id\":\"123466\", \"description\":\"simple description\"}}'

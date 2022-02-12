@@ -1,0 +1,94 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+# Before run pipeline please check the variables
+# Library variables
+# AzureSubscription
+
+# Pipeline variables
+# MajorVer
+# MinorVer
+# PatchVer
+# ProjectName
+# AppServiceName
+
+# Changing the name the variable $(Build.BuildNumber) will change as well
+name: $(MajorVer).$(MinorVer).$(patchVer)$(Rev:.r)
+
+# manual trigger
+trigger:
+  - none
+#- main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  - group: General
+  - name: buildConfiguration
+    value: "Release"
+  - name: version
+    value: "$(Build.BuildNumber)" # This variable is used to update the nuget version
+
+# Build section
+steps:
+  # Placeholder for simple script
+  - script: echo Start building process!
+    displayName: "Run a one-line script"
+  - task: UseDotNet@2
+    inputs:
+      version: "6.0.x"
+      includePreviewVersions: true # Required for preview versions
+  - task: NuGetAuthenticate@0
+    displayName: "NuGet Authenticate"
+
+  - task: DotNetCoreCLI@2
+    displayName: "Build projects"
+    inputs:
+      command: "build"
+      projects: "**/*.csproj"
+      arguments: "--configuration $(BuildConfiguration)" # Update this to match your need
+
+  # Run the Test (after building)
+  - task: DotNetCoreCLI@2
+    displayName: "Run tests"
+    inputs:
+      command: "test"
+      arguments: "--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/"
+      publishTestResults: true
+      projects: "$(ProjectName).UnitTests"
+
+  - task: PublishCodeCoverageResults@1
+    displayName: "Publish code coverage report"
+    inputs:
+      codeCoverageTool: "Cobertura"
+      summaryFileLocation: "$(Build.SourcesDirectory)/**/coverage.cobertura.xml"
+      additionalCodeCoverageFiles:
+      failIfCoverageEmpty: false
+
+  # Publish the artifact to be ready for deploy
+  - task: DotNetCoreCLI@2
+    displayName: Publish
+    inputs:
+      command: "publish"
+      publishWebProjects: true
+  - task: CopyFiles@2
+    inputs:
+      targetFolder: "$(Build.ArtifactStagingDirectory)"
+  - task: PublishBuildArtifacts@1
+    displayName: "Publish Artifact: drop"
+    inputs:
+      PathtoPublish: "$(build.artifactstagingdirectory)"
+# Deploy the artifact on Azure
+# Please move this step to the release pipeline
+#- task: AzureRmWebAppDeployment@4
+#  displayName: 'Deploy Azure App Service'
+#  inputs:
+#    connectionType: 'AzureRM'
+#    azureSubscription: '$(AzureSubscription)'
+#    appType: 'webAppLinux'
+#    webAppName: '$(AppServiceName)'
+#    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+#    runtimeStack: 'DOTNETCORE|5.0'

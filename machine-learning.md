@@ -1,5 +1,5 @@
 Welcome to Genocs!
-===================
+===
 
 This is the machine learning useful resources
 

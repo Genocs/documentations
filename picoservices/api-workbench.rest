@@ -39,8 +39,8 @@
 GET {{appUrl}} HTTP/1.1
 
 
-### Check the ping
-GET {{appUrl}}/ping HTTP/1.1
+### The Health Check
+GET {{appUrl}}/hc HTTP/1.1
 
 
 ### Check simple post
@@ -58,8 +58,8 @@ Content-Type: application/json
 ### Dapr Version - Check the Home page
 GET {{Dapr-appUrl}}/v1.0/invoke/{{Dapr-appName}}/method HTTP/1.1
 
-### Dapr Version - Check the ping
-GET {{Dapr-appUrl}}/v1.0/invoke/{{Dapr-appName}}/method/ping HTTP/1.1
+### Dapr Version - Health Check
+GET {{Dapr-appUrl}}/v1.0/invoke/{{Dapr-appName}}/method/hc HTTP/1.1
 
 ### Dapr Version - Check simple post
 POST {{Dapr-appUrl}}/v1.0/invoke/{{Dapr-appName}}/method/order/submit HTTP/1.1

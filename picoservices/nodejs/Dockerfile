@@ -1,6 +1,10 @@
 FROM node:14
 
-# Create app directory
+# http port exposed outside the container
+EXPOSE 3000
+
+
+# Set the Current Working Directory inside the container
 WORKDIR /usr/src/app
 
 # Install app dependencies
@@ -14,6 +18,4 @@ RUN npm install
 # RUN npm ci --only=production
 # Bundle app source
 COPY . .
-
-EXPOSE 3000
 CMD [ "node", "hello-server.js" ]

@@ -16,8 +16,8 @@ namespace Genocs.Microservice.Controllers
         public IActionResult Get()
             => Ok("Welcome to .NET!!!");
 
-        [HttpGet("ping")]
-        public IActionResult GetPing()
-            => Ok("pong");
+        [HttpGet("hc")]
+        public IActionResult GetHealthCheck()
+            => Ok("healthy");
     }
 }

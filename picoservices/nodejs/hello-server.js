@@ -14,8 +14,8 @@ app.get('/', (_req, res) => {
     res.send('Hello from Node.js!!!');
 });
 
-app.get('/ping', (_req, res) => {
-    res.send('pong');
+app.get('/hc', (_req, res) => {
+    res.send('healthy');
 });
 
 app.post('/order/submit', express.json(), (req, res) => {

@@ -1,5 +1,17 @@
-# documentations
+documentations
+===
+
 This repo contains a list of useful resources 
+
+
+# picoservices
+This folder contains the template to build webApi with different languages.
+
+Supported languages are:
+- golang
+- .NET
+- python
+- nodejs
 
 
 ## Microservice Patterns
@@ -17,21 +29,9 @@ This repo contains a list of useful resources
 
 
 
-
-
-
-
-
-
-
-
 ## IA and Machine Learning
 
 | Item                | .NET                                                  | Github                                                        |
 | :------------------ | ----------------------------------------------------: | ------------------------------------------------------------: |
 | aforgenet           | [aforgenet](http://www.aforgenet.com/)                |  [aforgenet](https://github.com/andrewkirillov/AForge.NET)    |
 | accord-framework    | [accord-framework](http://accord-framework.net/)      |  [accord-framework](https://github.com/accord-net/framework)  |
-
-
-
-

@@ -10,9 +10,9 @@ def hello():
     return 'Welcome to Flask!!!'
 
 
-@app.route('/ping', methods=['GET'])
-def ping():
-    return 'pong'
+@app.route('/hc', methods=['GET'])
+def health_check():
+    return 'healthy '
 
 
 @app.route('/order/submit', methods=['POST'])

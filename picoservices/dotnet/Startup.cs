@@ -101,7 +101,7 @@ namespace Genocs.Microservice
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "UseUTUAuth v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "UseAuth v1"));
             }
 
             app.UseHttpsRedirection();
